@@ -84,6 +84,15 @@ What the workflow does:
 
 After it runs, you can share the link above so others can play right from the browser.
 
+## Saves
+
+- Saves are stored in your browser under this site’s origin (Ruffle emulates Flash SharedObjects using browser storage). They persist per-device and per-browser.
+- Clearing site data (cookies/storage) or using private browsing will remove the save.
+- You can backup/restore your save with the in-page panel at the bottom-right:
+  - Backup save: downloads a JSON snapshot of the relevant storage
+  - Restore save: uploads a previously backed up JSON; reload after restoring
+  - Reset save: clears stored data for this game on this browser
+
 ## Notes
 
 - If your browser blocks local file features, always use the local server (scripts above) instead of double‑clicking the HTML file.
