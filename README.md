@@ -1,6 +1,32 @@
 # Feudalism (Flash) – Play locally via Ruffle
 
-This repo packages the classic Flash game Feudalism and makes it playable locally using the Ruffle emulator and a tiny static server.
+[![Play on GitHub Pages](https://img.shields.io/badge/Play-GitHub%20Pages-blue?style=for-the-badge&logo=github)](https://gustavogmoraes.github.io/Feudalism/)
+
+## About the Game
+
+**Feudalism** is a classic Flash strategy/RPG game created by **VitalyZ** (Vitaly Zotov) and originally released on September 21, 2007. It was published on platforms like Newgrounds, Kongregate, and Armor Games, where it became a beloved entry in the Flash gaming era.
+
+In Feudalism, you:
+
+- Choose from 8 heroes across 4 nations
+- Build armies and conquer cities in an open-world medieval setting
+- Recruit soldiers, buy weapons and steeds, and learn skills
+- Battle to eventually rule the entire land (32 cities total)
+
+The game was inspired by Mount & Blade and became a nostalgic favorite for many players.
+
+## Why This Repository Exists
+
+Adobe Flash Player was discontinued on January 12, 2021, making thousands of classic Flash games inaccessible. This repository preserves **Feudalism** by:
+
+- Hosting the original SWF file
+- Using **Ruffle** (a Flash emulator) to run it in modern browsers without plugins
+- Providing easy local and online (GitHub Pages) playback
+- Adding save backup/restore tools so your progress is portable
+
+**All credit goes to VitalyZ** for creating this game. This is a preservation and accessibility project with no commercial intent.
+
+---
 
 ## Ways to run
 
@@ -40,7 +66,7 @@ npm start
 
 Ruffle is included via npm as a dependency (`@ruffle-rs/ruffle`) and copied locally for offline play. Ruffle is licensed under MIT/Apache-2.0. See the Ruffle project at <https://ruffle.rs>.
 
-This repository’s own content is MIT licensed. See LICENSE.
+This repository's own content (scripts, config, documentation) is MIT licensed. See LICENSE. The game itself (Feudalism.swf) is © VitalyZ and is hosted here for preservation and non-commercial use.
 
 ### Why no Flash Player EXE?
 
