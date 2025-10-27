@@ -1,0 +1,17 @@
+{
+  "name": "feudalism",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Feudalism (Flash) playable locally via Ruffle and a simple static server.",
+  "scripts": {
+    "postinstall": "node scripts/postinstall.js",
+    "start": "http-server -p 8080 -o play_feudalism.html -c-1 .",
+    "start:ps": "powershell -NoProfile -ExecutionPolicy Bypass -File ./run_feudalism.ps1"
+  },
+  "dependencies": {
+    "@ruffle-rs/ruffle": "*"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+}

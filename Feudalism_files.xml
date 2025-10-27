@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files>
+  <file name="Feudalism.swf" source="original">
+    <mtime>1644481531</mtime>
+    <size>960383</size>
+    <md5>fbd4b13e051284b6d099126d56fa7547</md5>
+    <crc32>808fc3fb</crc32>
+    <sha1>93b8a0bd5306819a277343459548dc7e3db90cc7</sha1>
+    <format>Shockwave Flash</format>
+    <length>3.07</length>
+    <width>800</width>
+    <height>600</height>
+    <viruscheck>1644481870</viruscheck>
+  </file>
+  <file name="Feudalism_archive.torrent" source="metadata">
+    <btih>56288a300c758a23c7fb1a7b4d0e0d93339ceaf7</btih>
+    <mtime>1652625432</mtime>
+    <size>2138</size>
+    <md5>00bf1859b7dbca8dd17eae8a91223359</md5>
+    <crc32>733cbeea</crc32>
+    <sha1>d4d6c517ce1cbfc4ac1e2ea27b5ff3473e44e013</sha1>
+    <format>Archive BitTorrent</format>
+  </file>
+  <file name="Feudalism_files.xml" source="original">
+    <format>Metadata</format>
+    <md5>6ca133fb92f37062df21fb536bee20f9</md5>
+    <summation>md5</summation>
+  </file>
+  <file name="Feudalism_meta.sqlite" source="original">
+    <mtime>1644481558</mtime>
+    <size>28672</size>
+    <md5>8b5140bde964334f9b0c4cbfb7ae9adf</md5>
+    <crc32>0ff97fd4</crc32>
+    <sha1>47fdb59290a5e1612e3f1ca1e59d2cf89ca7801d</sha1>
+    <format>Metadata</format>
+  </file>
+  <file name="Feudalism_meta.xml" source="original">
+    <mtime>1652625431</mtime>
+    <size>1218</size>
+    <md5>e06786f6ed4d9c9e84284c8217876f9c</md5>
+    <crc32>a0e0ba5c</crc32>
+    <sha1>5fa703dcd526afc473e4890023f710a392a62d9b</sha1>
+    <format>Metadata</format>
+  </file>
+  <file name="__ia_thumb.jpg" source="original">
+    <mtime>1644481563</mtime>
+    <size>18807</size>
+    <md5>cde37e72c8b248ef7f6b61c9f6377ce1</md5>
+    <crc32>0bd5d036</crc32>
+    <sha1>cc59320fcd617b7c760a43f081a4966d4cb6a643</sha1>
+    <format>Item Tile</format>
+    <rotation>0</rotation>
+  </file>
+  <file name="feudalism.png" source="original">
+    <mtime>1644481554</mtime>
+    <size>237864</size>
+    <md5>3305ec9b83e2c539c1d6300a45d2bcb4</md5>
+    <crc32>d0ece1c2</crc32>
+    <sha1>b655c947019b9cc4551176336c8bc95a6027bf69</sha1>
+    <format>PNG</format>
+  </file>
+  <file name="feudalism_thumb.jpg" source="derivative">
+    <format>JPEG Thumb</format>
+    <original>feudalism.png</original>
+    <mtime>1644481906</mtime>
+    <size>10033</size>
+    <md5>2668e8d71390c623a731a1188641d02c</md5>
+    <crc32>96b9ded5</crc32>
+    <sha1>abb0fdbc4e011f51ce320d4b6ddbf16fc1874f2a</sha1>
+  </file>
+</files>

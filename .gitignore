@@ -1,0 +1,22 @@
+# Node
+node_modules/
+package-lock.json
+npm-debug.log*
+yarn.lock
+pnpm-lock.yaml
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local build/output
+vendor/
+
+# Archives/torrents
+Feudalism_archive.torrent
+
+# Misc
+*.log
