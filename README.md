@@ -68,6 +68,22 @@ git branch -M main
 git push -u origin main
 ```
 
+## GitHub Pages (Play online)
+
+This repository is configured to auto-deploy to GitHub Pages on every push to `main`.
+
+- Workflow: `.github/workflows/pages.yml`
+- Output URL (after the first successful run): `https://gustavogmoraes.github.io/Feudalism/`
+
+What the workflow does:
+
+- Runs `npm ci` to create a local copy of Ruffle assets under `vendor/ruffle/`
+- Builds a minimal `dist/` with `index.html` (copied from `play_feudalism.html`), `Feudalism.swf`, and `vendor/ruffle/`
+- Adds `.nojekyll` to prevent Jekyll processing
+- Deploys `dist/` to GitHub Pages using official Actions
+
+After it runs, you can share the link above so others can play right from the browser.
+
 ## Notes
 
 - If your browser blocks local file features, always use the local server (scripts above) instead of double‑clicking the HTML file.
