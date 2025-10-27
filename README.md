@@ -42,6 +42,12 @@ Ruffle is included via npm as a dependency (`@ruffle-rs/ruffle`) and copied loca
 
 This repository’s own content is MIT licensed. See LICENSE.
 
+### Why no Flash Player EXE?
+
+There used to be a standalone Adobe Flash “Projector” executable (`flashplayer_sa.exe`) that could run SWF files directly. It is not required here because the game runs via Ruffle in your browser. To avoid redistributing proprietary binaries and to keep the repo clean, we removed the EXE and added it to `.gitignore`.
+
+If you still want the legacy projector for personal testing, search for “Adobe Flash Player projector content debugger” from official sources and use it at your own risk. Again, it’s not needed for this setup.
+
 ## GitHub
 
 To publish this repo on GitHub using GitHub CLI:
