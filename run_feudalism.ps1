@@ -62,6 +62,8 @@ if (Get-Command python -ErrorAction SilentlyContinue) {
                     ".swf" { $response.ContentType = "application/x-shockwave-flash" }
                     ".js" { $response.ContentType = "application/javascript" }
                     ".css" { $response.ContentType = "text/css" }
+                    ".wasm" { $response.ContentType = "application/wasm" }
+                    ".map" { $response.ContentType = "application/json" }
                     default { $response.ContentType = "application/octet-stream" }
                 }
                 

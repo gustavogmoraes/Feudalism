@@ -5,23 +5,31 @@
 const fs = require('fs');
 const path = require('path');
 
-const src = path.join(__dirname, '..', 'node_modules', '@ruffle-rs', 'ruffle', 'ruffle.js');
+const pkgDir = path.join(__dirname, '..', 'node_modules', '@ruffle-rs', 'ruffle');
 const destDir = path.join(__dirname, '..', 'vendor', 'ruffle');
-const dest = path.join(destDir, 'ruffle.js');
 
 function ensureDir(p) {
   if (!fs.existsSync(p)) fs.mkdirSync(p, { recursive: true });
 }
 
 function copy() {
-  if (!fs.existsSync(src)) {
-    console.warn('[postinstall] Ruffle not found at', src);
+  if (!fs.existsSync(pkgDir)) {
+    console.warn('[postinstall] Ruffle package not found at', pkgDir);
     console.warn('[postinstall] The page will fall back to the CDN. This is fine.');
     return;
   }
   ensureDir(destDir);
-  fs.copyFileSync(src, dest);
-  console.log('[postinstall] Copied Ruffle to', dest);
+  const entries = fs.readdirSync(pkgDir);
+  const wanted = /^(ruffle\.js(\.map)?|core\.ruffle\.[^.]+\.js(\.map)?|.*\.wasm)$/i;
+  let copied = 0;
+  for (const name of entries) {
+    if (!wanted.test(name)) continue;
+    const src = path.join(pkgDir, name);
+    const dst = path.join(destDir, name);
+    fs.copyFileSync(src, dst);
+    copied++;
+  }
+  console.log(`[postinstall] Copied ${copied} Ruffle asset(s) to ${destDir}`);
 }
 
 try {
