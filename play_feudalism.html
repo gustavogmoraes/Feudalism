@@ -46,6 +46,19 @@
     <!-- Try local Ruffle first (installed by npm postinstall), then fall back to CDN -->
     <script src="vendor/ruffle/ruffle.js" defer></script>
     <script src="https://unpkg.com/@ruffle-rs/ruffle" defer></script>
+    <style>
+        #saves-panel {
+            position: fixed; bottom: 20px; right: 20px;
+            display: flex; gap: 8px; align-items: center;
+            background: rgba(0,0,0,0.6); padding: 8px 10px; border-radius: 8px;
+            font-size: 13px; z-index: 1000;
+        }
+        #saves-panel button, #saves-panel label {
+            background: #333; color: #fff; border: 1px solid #555; border-radius: 6px;
+            padding: 6px 10px; cursor: pointer;
+        }
+        #saves-panel input[type="file"] { display: none; }
+    </style>
 </head>
 <body>
     <h1>🏰 Feudalism 🗡️</h1>
@@ -68,5 +81,142 @@
         <p>Recruit soldiers, capture cities, and choose from 8 heroes!</p>
         <p><em>Powered by Ruffle Flash Emulator</em></p>
     </div>
+
+    <!-- Lightweight saves backup/restore panel -->
+    <div id="saves-panel">
+        <button id="btn-backup" title="Download your current Feudalism save to a file">Backup save</button>
+        <label for="file-restore" title="Restore a previously backed-up save">Restore save</label>
+        <input id="file-restore" type="file" accept="application/json">
+        <button id="btn-reset" title="Delete this game's saved data in this browser">Reset save</button>
+    </div>
+
+    <script>
+    (function(){
+        const toast = (msg) => {
+            console.log('[Saves]', msg);
+        };
+
+        function dl(filename, data) {
+            const blob = new Blob([data], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url; a.download = filename; document.body.appendChild(a); a.click();
+            setTimeout(() => { URL.revokeObjectURL(url); a.remove(); }, 0);
+        }
+
+        async function exportIndexedDB() {
+            if (!('indexedDB' in window)) return null;
+            const result = {};
+            const names = (indexedDB.databases ? await indexedDB.databases() : []).map(db => db.name).filter(Boolean);
+            // Grab likely Ruffle databases; if list API unsupported, try common names
+            const candidateNames = names && names.length ? names : ['ruffle','Ruffle','ruffle-player'];
+            for (const name of candidateNames) {
+                try {
+                    const db = await new Promise((resolve, reject) => {
+                        const req = indexedDB.open(name);
+                        req.onerror = () => reject(req.error);
+                        req.onsuccess = () => resolve(req.result);
+                    });
+                    const stores = Array.from(db.objectStoreNames || []);
+                    const dbDump = {};
+                    await new Promise((resolve) => {
+                        if (!stores.length) { db.close(); resolve(); return; }
+                        let remaining = stores.length;
+                        stores.forEach(storeName => {
+                            const tx = db.transaction(storeName, 'readonly');
+                            const store = tx.objectStore(storeName);
+                            const req = store.getAll();
+                            req.onsuccess = () => { dbDump[storeName] = req.result; if(--remaining===0){ db.close(); resolve(); } };
+                            req.onerror = () => { dbDump[storeName] = []; if(--remaining===0){ db.close(); resolve(); } };
+                        });
+                    });
+                    // Heuristic: include only if it contains anything
+                    const nonEmpty = Object.values(dbDump).some(arr => Array.isArray(arr) && arr.length);
+                    if (nonEmpty) result[name] = dbDump;
+                } catch (e) {
+                    // ignore unknown dbs
+                }
+            }
+            return result;
+        }
+
+        async function importIndexedDB(dump) {
+            if (!dump || !('indexedDB' in window)) return;
+            for (const [name, stores] of Object.entries(dump)) {
+                await new Promise((resolve, reject) => {
+                    const req = indexedDB.open(name);
+                    req.onerror = () => reject(req.error);
+                    req.onsuccess = () => {
+                        const db = req.result;
+                        const tx = db.transaction(Object.keys(stores), 'readwrite');
+                        tx.oncomplete = () => { db.close(); resolve(); };
+                        tx.onerror = () => { db.close(); resolve(); };
+                        for (const [storeName, rows] of Object.entries(stores)) {
+                            try {
+                                const store = tx.objectStore(storeName);
+                                store.clear();
+                                (rows||[]).forEach(v => store.add(v));
+                            } catch (e) { /* store may not exist; skip */ }
+                        }
+                    };
+                });
+            }
+        }
+
+        function exportLocalStorage() {
+            const snapshot = {};
+            for (let i=0;i<localStorage.length;i++){
+                const k = localStorage.key(i);
+                snapshot[k] = localStorage.getItem(k);
+            }
+            return snapshot;
+        }
+        function importLocalStorage(obj){
+            if (!obj) return;
+            for (const [k,v] of Object.entries(obj)) localStorage.setItem(k, v);
+        }
+        function clearRuffleData(){
+            // Best-effort: clear common ruffle keys and DBs
+            for (let i=localStorage.length-1;i>=0;i--){
+                const k = localStorage.key(i);
+                if (/ruffle|Ruffle|sharedobject|lso/i.test(k)) localStorage.removeItem(k);
+            }
+            if (indexedDB && indexedDB.databases) {
+                indexedDB.databases().then(dbs => {
+                    dbs.forEach(db => { if (db.name && /ruffle|Ruffle/i.test(db.name)) indexedDB.deleteDatabase(db.name); });
+                });
+            }
+        }
+
+        async function backup(){
+            const payload = {
+                meta: { app: 'Feudalism', when: new Date().toISOString(), origin: location.origin, path: location.pathname },
+                localStorage: exportLocalStorage(),
+                indexedDB: await exportIndexedDB(),
+            };
+            dl('feudalism-save-backup.json', JSON.stringify(payload,null,2));
+            toast('Backup downloaded');
+        }
+        async function restore(file){
+            const text = await file.text();
+            const data = JSON.parse(text);
+            importLocalStorage(data.localStorage);
+            await importIndexedDB(data.indexedDB);
+            alert('Save restored. Reload the page to take effect.');
+        }
+
+        document.getElementById('btn-backup').addEventListener('click', backup);
+        document.getElementById('btn-reset').addEventListener('click', () => {
+            if (confirm('This will delete saved data for this game on this browser. Continue?')){
+                clearRuffleData();
+                alert('Save cleared. Reload the page.');
+            }
+        });
+        document.getElementById('file-restore').addEventListener('change', (e) => {
+            const f = e.target.files && e.target.files[0];
+            if (f) restore(f);
+        });
+    })();
+    </script>
 </body>
 </html>
