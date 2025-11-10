@@ -33,9 +33,9 @@ jobs:
         run: |
           set -e
           mkdir -p dist
-          cp play_feudalism.html dist/
-          cp play_feudalism.html dist/index.html
-          cp Feudalism.swf dist/
+          cp play_feudalism2.html dist/
+          cp play_feudalism2.html dist/index.html
+          cp Feudalism2.swf dist/
           mkdir -p dist/vendor
           cp -r vendor/ruffle dist/vendor/
           touch dist/.nojekyll
