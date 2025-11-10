@@ -1,11 +1,11 @@
-# Feudalism Flash Game Launcher
+# Feudalism 2 Flash Game Launcher
 # This script starts a local web server and opens the game in your browser
 
-$gameFile = "Feudalism.swf"
-$htmlFile = "play_feudalism.html"
+$gameFile = "Feudalism2.swf"
+$htmlFile = "play_feudalism2.html"
 $port = 8080
 
-Write-Host "Feudalism Game Launcher" -ForegroundColor Cyan
+Write-Host "Feudalism 2 Game Launcher" -ForegroundColor Cyan
 Write-Host "======================" -ForegroundColor Cyan
 Write-Host ""
 

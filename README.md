@@ -1,23 +1,23 @@
-# Feudalism (Flash) – Play locally via Ruffle
+# Feudalism 2 (Flash) – Play locally via Ruffle
 
-[![Play on GitHub Pages](https://img.shields.io/badge/Play-GitHub%20Pages-blue?style=for-the-badge&logo=github)](https://gustavogmoraes.github.io/Feudalism/)
+[![Play on GitHub Pages](https://img.shields.io/badge/Play-GitHub%20Pages-blue?style=for-the-badge&logo=github)](https://gustavogmoraes.github.io/Feudalism2/)
 
 ## About the Game
 
-**Feudalism** is a classic Flash strategy/RPG game created by **VitalyZ** (Vitaly Zotov) and originally released on September 21, 2007. It was published on platforms like Newgrounds, Kongregate, and Armor Games, where it became a beloved entry in the Flash gaming era.
+**Feudalism 2** is a classic Flash strategy/RPG game created by **VitalyZ** (Vitaly Zotov). It is the sequel to the original Feudalism and was published on platforms like Newgrounds, Kongregate, and Armor Games, where it became a beloved entry in the Flash gaming era.
 
-In Feudalism, you:
+In Feudalism 2, you:
 
-- Choose from 8 heroes across 4 nations
-- Build armies and conquer cities in an open-world medieval setting
-- Recruit soldiers, buy weapons and steeds, and learn skills
-- Battle to eventually rule the entire land (32 cities total)
+- Choose from multiple heroes across different nations
+- Build armies and conquer cities in an expanded open-world medieval setting
+- Recruit soldiers, buy weapons and steeds, and learn enhanced skills
+- Battle to eventually rule the entire land with more cities and content than the original
 
-The game was inspired by Mount & Blade and became a nostalgic favorite for many players.
+The game was inspired by Mount & Blade and became a nostalgic favorite for many players, building upon the success of the original Feudalism.
 
 ## Why This Repository Exists
 
-Adobe Flash Player was discontinued on January 12, 2021, making thousands of classic Flash games inaccessible. This repository preserves **Feudalism** by:
+Adobe Flash Player was discontinued on January 12, 2021, making thousands of classic Flash games inaccessible. This repository preserves **Feudalism 2** by:
 
 - Hosting the original SWF file
 - Using **Ruffle** (a Flash emulator) to run it in modern browsers without plugins
@@ -25,6 +25,8 @@ Adobe Flash Player was discontinued on January 12, 2021, making thousands of cla
 - Adding save backup/restore tools so your progress is portable
 
 **All credit goes to VitalyZ** for creating this game. This is a preservation and accessibility project with no commercial intent.
+
+> **Note:** Looking for the original Feudalism? Check out the [Feudalism repository](https://github.com/gustavogmoraes/Feudalism).
 
 ---
 
@@ -35,13 +37,13 @@ Adobe Flash Player was discontinued on January 12, 2021, making thousands of cla
 
 ### Option A: Windows Task/Script
 
-In VS Code, run the task “Play Feudalism (Local Server)”; or from a terminal:
+In VS Code, run the task “Play Feudalism 2 (Local Server)”; or from a terminal:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\run_feudalism.ps1
+powershell -NoProfile -ExecutionPolicy Bypass -File .\run_feudalism2.ps1
 ```
 
-It opens your browser at <http://localhost:8080/play_feudalism.html>
+It opens your browser at <http://localhost:8080/play_feudalism2.html>
 
 ### Option B: Node.js (offline‑friendly)
 
@@ -57,16 +59,16 @@ npm start
 
 ## Files
 
-- `Feudalism.swf` – the game
-- `play_feudalism.html` – HTML wrapper using Ruffle
-- `run_feudalism.ps1` – Windows PowerShell local server fallback (works without Python/Node)
+- `Feudalism2.swf` – the game
+- `play_feudalism2.html` – HTML wrapper using Ruffle
+- `run_feudalism2.ps1` – Windows PowerShell local server fallback (works without Python/Node)
 - `scripts/postinstall.js` – copies Ruffle into `vendor/` after `npm install`
 
 ## Ruffle and licensing
 
 Ruffle is included via npm as a dependency (`@ruffle-rs/ruffle`) and copied locally for offline play. Ruffle is licensed under MIT/Apache-2.0. See the Ruffle project at <https://ruffle.rs>.
 
-This repository's own content (scripts, config, documentation) is MIT licensed. See LICENSE. The game itself (Feudalism.swf) is © VitalyZ and is hosted here for preservation and non-commercial use.
+This repository's own content (scripts, config, documentation) is MIT licensed. See LICENSE. The game itself (Feudalism2.swf) is © VitalyZ and is hosted here for preservation and non-commercial use.
 
 ### Why no Flash Player EXE?
 
@@ -104,7 +106,7 @@ This repository is configured to auto-deploy to GitHub Pages on every push to `m
 What the workflow does:
 
 - Runs `npm ci` to create a local copy of Ruffle assets under `vendor/ruffle/`
-- Builds a minimal `dist/` with `index.html` (copied from `play_feudalism.html`), `Feudalism.swf`, and `vendor/ruffle/`
+- Builds a minimal `dist/` with `index.html` (copied from `play_feudalism2.html`), `Feudalism2.swf`, and `vendor/ruffle/`
 - Adds `.nojekyll` to prevent Jekyll processing
 - Deploys `dist/` to GitHub Pages using official Actions
 

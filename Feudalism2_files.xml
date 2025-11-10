@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <files>
-  <file name="Feudalism.swf" source="original">
+  <file name="Feudalism2.swf" source="original">
     <mtime>1644481531</mtime>
     <size>960383</size>
     <md5>fbd4b13e051284b6d099126d56fa7547</md5>
@@ -51,7 +51,7 @@
     <format>Item Tile</format>
     <rotation>0</rotation>
   </file>
-  <file name="feudalism.png" source="original">
+  <file name="feudalism2.png" source="original">
     <mtime>1644481554</mtime>
     <size>237864</size>
     <md5>3305ec9b83e2c539c1d6300a45d2bcb4</md5>
@@ -61,7 +61,7 @@
   </file>
   <file name="feudalism_thumb.jpg" source="derivative">
     <format>JPEG Thumb</format>
-    <original>feudalism.png</original>
+    <original>feudalism2.png</original>
     <mtime>1644481906</mtime>
     <size>10033</size>
     <md5>2668e8d71390c623a731a1188641d02c</md5>
